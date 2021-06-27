@@ -130,7 +130,7 @@ async function jdCrazyJoy() {
     }
     if ($.joyIds[i] === 0) {
       console.log(`购买等级`+$.buyJoyLevel)
-      await buyJoy($.buyJoyLevel)
+      await buyJoy(1)
       await $.wait(1000)
       await getJoyList()
       await $.wait(1000)
