@@ -197,7 +197,7 @@ function findZeroNum() {
 //查找当前 购买 joyLists 中最低等级的那一个
 function finMinJoyLevel() {
   //return Math.min(...$.joyIds.filter(s => s))
-  returns 1;
+  return 1;
 }
 /**
  * 来源：https://elecv2.ml/#算法研究之合并类小游戏的最优购买问题
