@@ -60,6 +60,9 @@ if ($.isNode()) {
 
   while (true) {
     count++
+    //限制运行次数，防止手机太过耗电
+    if(count > 50 )
+      break;
     console.log(`============开始第${count}次挂机=============`)
     for (let i = 0; i < cookiesArr.length; i++) {
       if (cookiesArr[i]) {
@@ -126,6 +129,7 @@ async function jdCrazyJoy() {
       break
     }
     if ($.joyIds[i] === 0) {
+      console.log(`购买等级`+$.buyJoyLevel)
       await buyJoy($.buyJoyLevel)
       await $.wait(1000)
       await getJoyList()
@@ -196,8 +200,8 @@ function findZeroNum() {
 }
 //查找当前 购买 joyLists 中最低等级的那一个
 function finMinJoyLevel() {
-  //return Math.min(...$.joyIds.filter(s => s))
-  return 1;
+  return Math.min(...$.joyIds.filter(s => s))
+  //return 1;
 }
 /**
  * 来源：https://elecv2.ml/#算法研究之合并类小游戏的最优购买问题
