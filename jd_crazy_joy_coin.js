@@ -152,10 +152,29 @@ async function recursiveMergeJoy(joyLevel) {
       mergeResult = await mergeJoy(joyPOSList_1[1], joyPOSList_1[2]);
       console.log(mergeResult)
     }
+    else if(joyPOSList_1[0] === 1)
+    {
+      var joyPOSList_0 = getJoyPOS(0)
+      console.log(joyPOSList_0)
+      //有1个空格，并且有一个1级JOY，再买一个合并
+      if (joyPOSList_0[0] >= 1) {
+        await buyJoy(1)
+        await $.wait(300)
+        await getJoyList()
+
+        joyPOSList_1 = getJoyPOS(1)
+        if (joyPOSList_1[0] >= 2) {
+          $.log('有两个1级JOY，开始合并')
+          mergeResult = await mergeJoy(joyPOSList_1[1], joyPOSList_1[2]);
+          console.log(mergeResult)
+        }
+      }
+    }
     else {
       var joyPOSList_0 = getJoyPOS(0)
-      //有1个空格，并且有一个1级JOY，再买一个合并
-      if (joyPOSList_0[0] >= 1 && joyPOSList_1[0] === 1) {
+      console.log(joyPOSList_0)
+      if (joyPOSList_0[0] >= 2) {
+        await buyJoy(1)
         await buyJoy(1)
         await $.wait(300)
         await getJoyList()
