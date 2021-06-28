@@ -130,6 +130,7 @@ async function jdCrazyJoyNew()
 
 
 async function recursiveMergeJoy(joyLevel) {
+  console.log('合并JOY')
   var ret = await recursiveMergeJoy(joyLevel - 1)
   if (ret === -1)
     return -1
