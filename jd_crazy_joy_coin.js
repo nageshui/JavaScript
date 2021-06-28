@@ -74,7 +74,7 @@ if ($.isNode()) {
          $.log(`\n京东账号${$.index} ${$.nickName || $.UserName}\ncookie已过期,请重新登录获取\n`)
           continue
         }
-        await jdCrazyJoy()
+        await jdCrazyJoyNew()
       }
     }
     $.log(`\n\n`)
