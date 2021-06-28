@@ -139,6 +139,7 @@ async function recursiveMergeJoy(joyLevel) {
   if (ret === -1)
     return -1
 
+  await $.wait(300)
   await getJoyList()
   
   //如果是1级，并且有空格，买一个1级joy
