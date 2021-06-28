@@ -154,6 +154,7 @@ async function mergeJoyByLevel(joyLevel,minLevel) {
   if (joyList[0] < 2)
   {
     var joyList_0 = getJoyPOS(0)
+    console.log('空格位置'+joyList_0)
     if(joyLevel === minLevel)
     {
       if(joyList_0[0] > 0)
