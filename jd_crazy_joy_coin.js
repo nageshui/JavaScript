@@ -133,12 +133,11 @@ async function recursiveMergeJoy(joyLevel) {
   if(joyLevel ===0)
     return 0
 
-  console.log('合并JOY'+joyLevel)
-
   var ret = await recursiveMergeJoy(joyLevel - 1)
   if (ret === -1)
     return -1
 
+  console.log('合并JOY'+joyLevel)
   await $.wait(300)
   await getJoyList()
   
