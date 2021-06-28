@@ -61,8 +61,7 @@ if ($.isNode()) {
   while (true) {
     count++
     //限制运行次数，防止手机太过耗电
-    if(count > 50 )
-      break;
+    
     console.log(`============开始第${count}次挂机=============`)
     for (let i = 0; i < cookiesArr.length; i++) {
       if (cookiesArr[i]) {
