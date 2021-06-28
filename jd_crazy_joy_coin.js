@@ -121,7 +121,7 @@ async function jdCrazyJoyNew() {
   //await $.wait(1000)
 
   if ($.joyIds.length !== 16)
-    continue
+    return
 
   for (var loopcnt = 1; loopcnt < 33; loopcnt++) {
     //await recursiveMergeJoy(33)
