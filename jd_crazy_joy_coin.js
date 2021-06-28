@@ -133,12 +133,12 @@ async function jdCrazyJoyNew() {
   for (var loopcnt = minLevel; loopcnt < maxLevel; loopcnt++) {
     //await recursiveMergeJoy(33)
     let mergeResult=await mergeJoyByLevel(loopcnt,minLevel)
-    if(mergeResult===false)
-      break
+    //if(mergeResult===false)
+    //  break
     await $.wait(500)
   }
 
-  await $.wait(5000)
+  await $.wait(1000)
 }
 
 async function mergeJoyByLevel(joyLevel,minLevel) {
