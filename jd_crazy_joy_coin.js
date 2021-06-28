@@ -133,6 +133,7 @@ async function jdCrazyJoyNew() {
 
 async function mergeJoyByLevel(joyLevel) {
   var joyList = getJoyPOS(joyLevel)
+  console.log(joyLevel+'  '+joyList)
   if (joyList[0] < 2)
     return
 
