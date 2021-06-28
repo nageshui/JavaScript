@@ -147,8 +147,6 @@ async function mergeJoyByLevel(joyLevel) {
       $.joyIds[joyList_0[1]]=1
     }
   }
-  else
-    return
 
   
   console.log('合并'+joyLevel+' JOY')
