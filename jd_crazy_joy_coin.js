@@ -174,6 +174,8 @@ async function recursiveMergeJoy(joyLevel) {
       console.log(mergeResult)
     }
   }
+
+  return 0;
 }
 
 /*
