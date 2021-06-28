@@ -121,7 +121,7 @@ async function jdCrazyJoyNew() {
   //await $.wait(1000)
 
   console.log($.joyIds.length)
-  if ($.joyIds.length < 16)
+  if ($.joyIds.length < 12)
     return
 
   for (var loopcnt = 1; loopcnt < 33; loopcnt++) {
