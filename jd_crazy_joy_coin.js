@@ -189,6 +189,7 @@ async function recursiveMergeJoy(joyLevel) {
   }
   else {
     var joyPOSList = getJoyPOS(joyLevel)
+    console.log(joyLevel+'有'+joyPOSList)
     if (joyPOSList[0] >= 2) {
       $.log('有两个' + joyLevel + '级JOY，开始合并')
       mergeResult = await mergeJoy(joyPOSList[1], joyPOSList[2]);
