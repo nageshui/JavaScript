@@ -132,13 +132,15 @@ async function jdCrazyJoyNew()
 async function recursiveMergeJoy(joyLevel) {
   if(joyLevel<0)
     return -1
-  
+    
+  console.log('合并JOY'+joyLevel)
+
   var ret = await recursiveMergeJoy(joyLevel - 1)
   if (ret === -1)
     return -1
 
   await getJoyList()
-  console.log('合并JOY'+joyLevel)
+  
   //如果是1级，并且有空格，买一个1级joy
   if (joyLevel === 1) {
     //先检查有几个1级joy，不够2个
