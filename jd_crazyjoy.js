@@ -444,7 +444,7 @@ function mergeJoy(x, y) {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            console.log(data)
+            console.log(JSON.stringify(data))
             if (data.success && data.data.newJoyId) {
               if (data.data.newJoyId > 34) {
                 let level = function (newJoyId) {
