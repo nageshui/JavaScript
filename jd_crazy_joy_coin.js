@@ -124,7 +124,8 @@ async function jdCrazyJoyNew() {
   if ($.joyIds.length < 12)
     return
 
-  for (var loopcnt = 1; loopcnt < 33; loopcnt++) {
+  let maxLevel = Math.max(...$.joyIds)
+  for (var loopcnt = 1; loopcnt < maxLevel; loopcnt++) {
     //await recursiveMergeJoy(33)
     await mergeJoyByLevel(loopcnt)
   }
@@ -133,17 +134,17 @@ async function jdCrazyJoyNew() {
 }
 
 async function mergeJoyByLevel(joyLevel) {
-  console.log('合并'+joyLevel+' JOY')
   var joyList = getJoyPOS(joyLevel)
   console.log(joyLevel+'  '+joyList)
   if (joyList[0] < 2)
     return
 
+  console.log('合并'+joyLevel+' JOY')
+  await mergeJoy(joyList[1], joyList[2])
   $.joyIds[joyList[1]] = 0
   $.joyIds[joyList[2]] = joyLevel + 1
-  mergeJoy(joyList[1], joyList[2])
   await $.wait(500)
-  buyJoy(1)
+  await buyJoy(1)
   var i = 0;
   for (i = 0; i < $.joyIds.length; i++) {
     if ($.joyIds[i] === 0) {
