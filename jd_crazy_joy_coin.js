@@ -125,13 +125,14 @@ async function jdCrazyJoyNew() {
 
   for (var loopcnt = 1; loopcnt < 33; loopcnt++) {
     //await recursiveMergeJoy(33)
-    mergeJoyByLevel(loopcnt)
+    await mergeJoyByLevel(loopcnt)
   }
 
   await $.wait(5000)
 }
 
 async function mergeJoyByLevel(joyLevel) {
+  console.log('合并'+joyLevel+' JOY')
   var joyList = getJoyPOS(joyLevel)
   console.log(joyLevel+'  '+joyList)
   if (joyList[0] < 2)
