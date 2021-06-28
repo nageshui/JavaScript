@@ -151,7 +151,8 @@ async function mergeJoyByLevel(joyLevel) {
 
   
   console.log('合并'+joyLevel+' JOY')
-  await mergeJoy(joyList[1], joyList[2])
+  let mergeResult =await mergeJoy(joyList[1], joyList[2])
+  console.log(mergeResult)
   $.joyIds[joyList[1]] = 0
   $.joyIds[joyList[2]] = joyLevel + 1
   //await $.wait(500)
@@ -494,6 +495,7 @@ function getJoyShop() {
 }
 
 function mergeJoy(x, y) {
+  let mergeResult=false
   let body = { "operateType": "MERGE", "fromBoxIndex": x, "targetBoxIndex": y }
   return new Promise(async resolve => {
     $.get(taskUrl('crazyJoy_joy_moveOrMerge', JSON.stringify(body)), async (err, resp, data) => {
@@ -522,9 +524,11 @@ function mergeJoy(x, y) {
                       return '未知JOY'
                   }
                 }
+                mergeResult=true
                 console.log(`合并成功，获得${level(data.data.newJoyId)}级Joy`)
                 if (data.data.newJoyId === 1007 && $.isNode()) await notify.sendNotify($.name, `京东账号${$.index} ${$.nickName}\n合并成功，获得${level(data.data.newJoyId)}级Joy`)
               } else {
+                mergeResult=true
                 console.log(`合并成功，获得${data.data.newJoyId}级Joy`)
               }
             } else
@@ -534,7 +538,7 @@ function mergeJoy(x, y) {
       } catch (e) {
         $.logErr(e, resp)
       } finally {
-        resolve();
+        resolve(mergeResult);
       }
     })
   })
