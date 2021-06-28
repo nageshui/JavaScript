@@ -89,105 +89,105 @@ if ($.isNode()) {
 
 
 
-  async function jdCrazyJoyNew() {
-    $.coin = 0
-    $.bean = 0
-  
-    $.canBuy = true
-    await getJoyList()
-    await $.wait(1000)
-    if ($.joyIds && $.joyIds.length > 0) {
-      $.log('当前JOY分布情况')
-      $.log(`\n${$.joyIds[0]} ${$.joyIds[1]} ${$.joyIds[2]} ${$.joyIds[3]}`)
-      $.log(`${$.joyIds[4]} ${$.joyIds[5]} ${$.joyIds[6]} ${$.joyIds[7]}`)
-      $.log(`${$.joyIds[8]} ${$.joyIds[9]} ${$.joyIds[10]} ${$.joyIds[11]}\n`)
-    }
-  
-    //await getJoyShop()
-    await $.wait(1000)
-  
-    // 如果格子全部被占有且没有可以合并的JOY，只能回收低级的JOY (且最低等级的JOY小于30级)
-    if (checkHasFullOccupied() && !checkCanMerge() && finMinJoyLevel() < 30) {
-      const minJoyId = Math.min(...$.joyIds);
-      const boxId = $.joyIds.indexOf(minJoyId);
-      console.log(`格子全部被占有且没有可以合并的JOY，回收${boxId + 1}号位等级为${minJoyId}的JOY`)
-      await sellJoy(minJoyId, boxId);
-      await $.wait(1000)
-      await getJoyList();
-      await $.wait(1000)
-    }
-  
-    await hourBenefit()
-    await $.wait(1000)
-    //await getCoin()
-    //await $.wait(1000)
-  
-    for (var loopcnt = 0; loopcnt < 33; loopcnt++) {
-      recursiveMergeJoy(33)
-    }
-  
-    await $.wait(5000)
+async function jdCrazyJoyNew() {
+  $.coin = 0
+  $.bean = 0
+
+  $.canBuy = true
+  await getJoyList()
+  await $.wait(1000)
+  if ($.joyIds && $.joyIds.length > 0) {
+    $.log('当前JOY分布情况')
+    $.log(`\n${$.joyIds[0]} ${$.joyIds[1]} ${$.joyIds[2]} ${$.joyIds[3]}`)
+    $.log(`${$.joyIds[4]} ${$.joyIds[5]} ${$.joyIds[6]} ${$.joyIds[7]}`)
+    $.log(`${$.joyIds[8]} ${$.joyIds[9]} ${$.joyIds[10]} ${$.joyIds[11]}\n`)
   }
-  
-  function recursiveMergeJoy(joyLevel) {
-    var ret = recursiveMergeJoy(joyLevel - 1)
-    if (ret === -1)
-      return -1
-  
-    await getJoyList()
-    //如果是1级，并且有空格，买一个1级joy
-    if (joyLevel === 1 && checkHasFullOccupied()) {
-      //先检查有几个1级joy，不够2个
-      var joyPOSList_1 = getJoyPOS(1)
-      console.log(joyPOSList_1)
-      if (joyPOSList_1[0] >= 2) {
-        $.log('有两个1级JOY，开始合并')
-        mergeResult = await mergeJoy(joyPOSList_1[1], joyPOSList_1[2]);
-        console.log(mergeResult)
-      }
-      else {
-        var joyPOSList_0 = getJoyPOS(0)
-        //有1个空格，并且有一个1级JOY，再买一个合并
-        if (joyPOSList_0[0] >= 1 && joyPOSList_1[0] === 1) {
-          await buyJoy(1)
-          await $.wait(300)
-          await getJoyList()
-  
-          joyPOSList_1 = getJoyPOS(1)
-          if (joyPOSList_1[0] >= 2) {
-            $.log('有两个1级JOY，开始合并')
-            mergeResult = await mergeJoy(joyPOSList_1[1], joyPOSList_1[2]);
-            console.log(mergeResult)
-          }
+
+  //await getJoyShop()
+  await $.wait(1000)
+
+  // 如果格子全部被占有且没有可以合并的JOY，只能回收低级的JOY (且最低等级的JOY小于30级)
+  if (checkHasFullOccupied() && !checkCanMerge() && finMinJoyLevel() < 30) {
+    const minJoyId = Math.min(...$.joyIds);
+    const boxId = $.joyIds.indexOf(minJoyId);
+    console.log(`格子全部被占有且没有可以合并的JOY，回收${boxId + 1}号位等级为${minJoyId}的JOY`)
+    await sellJoy(minJoyId, boxId);
+    await $.wait(1000)
+    await getJoyList();
+    await $.wait(1000)
+  }
+
+  await hourBenefit()
+  await $.wait(1000)
+  //await getCoin()
+  //await $.wait(1000)
+
+  for (var loopcnt = 0; loopcnt < 33; loopcnt++) {
+    recursiveMergeJoy(33)
+  }
+
+  await $.wait(5000)
+}
+
+function recursiveMergeJoy(joyLevel) {
+  var ret = recursiveMergeJoy(joyLevel - 1)
+  if (ret === -1)
+    return -1
+
+  await getJoyList()
+  //如果是1级，并且有空格，买一个1级joy
+  if (joyLevel === 1 && checkHasFullOccupied()) {
+    //先检查有几个1级joy，不够2个
+    var joyPOSList_1 = getJoyPOS(1)
+    console.log(joyPOSList_1)
+    if (joyPOSList_1[0] >= 2) {
+      $.log('有两个1级JOY，开始合并')
+      mergeResult = await mergeJoy(joyPOSList_1[1], joyPOSList_1[2]);
+      console.log(mergeResult)
+    }
+    else {
+      var joyPOSList_0 = getJoyPOS(0)
+      //有1个空格，并且有一个1级JOY，再买一个合并
+      if (joyPOSList_0[0] >= 1 && joyPOSList_1[0] === 1) {
+        await buyJoy(1)
+        await $.wait(300)
+        await getJoyList()
+
+        joyPOSList_1 = getJoyPOS(1)
+        if (joyPOSList_1[0] >= 2) {
+          $.log('有两个1级JOY，开始合并')
+          mergeResult = await mergeJoy(joyPOSList_1[1], joyPOSList_1[2]);
+          console.log(mergeResult)
         }
       }
     }
-    else {
-      var joyPOSList = getJoyPOS(joyLevel)
-      if (joyPOSList[0] >= 2) {
-        $.log('有两个' + joyLevel + '级JOY，开始合并')
-        mergeResult = await mergeJoy(joyPOSList[1], joyPOSList[2]);
-        console.log(mergeResult)
-      }
+  }
+  else {
+    var joyPOSList = getJoyPOS(joyLevel)
+    if (joyPOSList[0] >= 2) {
+      $.log('有两个' + joyLevel + '级JOY，开始合并')
+      mergeResult = await mergeJoy(joyPOSList[1], joyPOSList[2]);
+      console.log(mergeResult)
     }
   }
-  
-  /*
-  根据JOY等级，查找有几个joy和对应位置
-  返回值为列表，第一个值是joy个数，后面一次为joy位置
-  */
-  function getJoyPOS(joyLevel) {
-    var joyList = [];
-    joyList.push(0)
-    for (var i = 0; i < $.joyIds.length; i++) {
-      if ($.joyIds[i] === joyLevel) {
-        joyList[0] += 1
-        joyList.push(i)
-      }
+}
+
+/*
+根据JOY等级，查找有几个joy和对应位置
+返回值为列表，第一个值是joy个数，后面一次为joy位置
+*/
+function getJoyPOS(joyLevel) {
+  var joyList = [];
+  joyList.push(0)
+  for (var i = 0; i < $.joyIds.length; i++) {
+    if ($.joyIds[i] === joyLevel) {
+      joyList[0] += 1
+      joyList.push(i)
     }
-  
-    return joyList;
   }
+
+  return joyList;
+}
 
 async function jdCrazyJoy() {
   $.coin = 0
