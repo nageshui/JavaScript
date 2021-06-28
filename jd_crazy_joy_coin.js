@@ -145,7 +145,7 @@ async function mergeJoyByLevel(joyLevel,minLevel) {
   var joyList = getJoyPOS(joyLevel)
   console.log(joyLevel+','+joyList)
 
-  if (joyList[0] ===0)
+  if (joyList[0] ===0 && joyLevel===minLevel)
   {
     var joyList_0 = getJoyPOS(0)
     if(joyList_0[0] >=1 )
