@@ -120,6 +120,7 @@ async function jdCrazyJoyNew() {
   //await getCoin()
   //await $.wait(1000)
 
+  console.log($.joyIds.length)
   if ($.joyIds.length < 16)
     return
 
