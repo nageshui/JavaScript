@@ -122,7 +122,7 @@ async function jdCrazyJoyNew()
   //await $.wait(1000)
 
   for (var loopcnt = 0; loopcnt < 33; loopcnt++) {
-    var startLevel= Math.min(...$.joyIds);
+    var startLevel= Math.max(...$.joyIds);
     await recursiveMergeJoy(startLevel)
   }
 
@@ -131,6 +131,8 @@ async function jdCrazyJoyNew()
 
 
 async function recursiveMergeJoy(joyLevel) {
+  if(startLevel<=0)
+    return -1
   console.log('合并JOY'+joyLevel)
   var ret = await recursiveMergeJoy(joyLevel - 1)
   if (ret === -1)
