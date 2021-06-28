@@ -163,6 +163,14 @@ function recursiveMergeJoy(joyLevel) {
       }
     }
   }
+  else {
+    var joyPOSList = getJoyPOS(joyLevel)
+    if (joyPOSList[0] >= 2) {
+      $.log('有两个' + joyLevel + '级JOY，开始合并')
+      mergeResult = await mergeJoy(joyPOSList[1], joyPOSList[2]);
+      console.log(mergeResult)
+    }
+  }
 }
 
 /*
