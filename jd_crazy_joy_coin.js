@@ -140,8 +140,12 @@ async function mergeJoyByLevel(joyLevel) {
 
   if (joyList[0] < 2)
   {
-    if(joyLevel === 1)
+    var joyList_0 = getJoyPOS(0)
+    if(joyLevel === 1 && joyList_0[0] > 0)
+    {
       await buyJoy(1)
+      $.joyIds[joyList_0[1]]=1
+    }
   }
   else
     return
