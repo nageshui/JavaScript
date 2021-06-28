@@ -121,6 +121,9 @@ async function jdCrazyJoyNew()
   //await getCoin()
   //await $.wait(1000)
 
+  if($.joyIds.length !== 16 )
+    continue
+
   for (var loopcnt = 0; loopcnt < 33; loopcnt++) {
     await recursiveMergeJoy(33)
   }
@@ -139,7 +142,7 @@ async function recursiveMergeJoy(joyLevel) {
 
   console.log('合并JOY'+joyLevel)
   await $.wait(300)
-  await getJoyList()
+  //await getJoyList()
   
   //如果是1级，并且有空格，买一个1级joy
   if (joyLevel === 1) {
