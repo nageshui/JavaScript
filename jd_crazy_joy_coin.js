@@ -146,16 +146,13 @@ async function jdCrazyJoyNew() {
   }
   */
 
-  var joyList_0 = getJoyPOS(0)
-  for (var i = 0; i < joyList_0.length; i++) {
-    await buyJoy(minLevel)
-    await $.wait(500)
-  }
 
-  if (joyList_0.length > 0) {
-    await getJoyList();
-    if ($.joyIds.length < 12)
-      return
+  for (var loopcnt = minLevel; loopcnt <= maxLevel; loopcnt++) {
+    //await recursiveMergeJoy(33)
+    let mergeResult = await mergeJoyByLevel(loopcnt, minLevel)
+    //if(mergeResult===false)
+    //  break
+    await $.wait(500)
   }
 
   //检查有没有小于minLevel的，有就卖掉
@@ -169,14 +166,11 @@ async function jdCrazyJoyNew() {
     }
   }
 
-  for (var loopcnt = minLevel; loopcnt <= maxLevel; loopcnt++) {
-    //await recursiveMergeJoy(33)
-    let mergeResult = await mergeJoyByLevel(loopcnt, minLevel)
-    //if(mergeResult===false)
-    //  break
+  var joyList_0 = getJoyPOS(0)
+  for (var i = 0; i < joyList_0.length; i++) {
+    await buyJoy(minLevel)
     await $.wait(500)
   }
-
   await $.wait(1500)
 }
 
