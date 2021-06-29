@@ -151,10 +151,13 @@ async function jdCrazyJoyNew() {
     await buyJoy(minLevel)
     await $.wait(500)
   }
-  await getJoyList();
-  if ($.joyIds.length < 12)
-    return
-    
+
+  if (joyList_0.length > 0) {
+    await getJoyList();
+    if ($.joyIds.length < 12)
+      return
+  }
+
   //检查有没有小于minLevel的，有就卖掉
   for (var i = 1; i < minLevel; i++) {
     var joyList_i = getJoyPOS(i)
