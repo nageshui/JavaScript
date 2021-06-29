@@ -146,10 +146,10 @@ async function jdCrazyJoyNew() {
   }
   */
 
-  minLevel = getCheapJoy(minLevel, 33)
+  var buyLevel = getCheapJoy(minLevel, 33)
   for (var loopcnt = minLevel; loopcnt <= maxLevel; loopcnt++) {
     //await recursiveMergeJoy(33)
-    let mergeResult = await mergeJoyByLevel(loopcnt, minLevel)
+    let mergeResult = await mergeJoyByLevel(loopcnt, buyLevel)
     //if(mergeResult===false)
     //  break
     await $.wait(500)
@@ -168,7 +168,7 @@ async function jdCrazyJoyNew() {
 
   var joyList_0 = getJoyPOS(0)
   for (var i = 0; i < joyList_0.length; i++) {
-    await buyJoy(minLevel)
+    await buyJoy(buyLevel)
     await $.wait(500)
   }
   await $.wait(1500)
