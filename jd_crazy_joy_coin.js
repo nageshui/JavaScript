@@ -492,7 +492,7 @@ function getJoyList() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            //console.log(data)
+            console.log(data)
             if (data.success && data.data.joyIds) {
               $.joyIds = data.data.joyIds
             } else
