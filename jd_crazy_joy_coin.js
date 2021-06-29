@@ -120,74 +120,79 @@ async function jdCrazyJoyNew() {
   //await getCoin()
   //await $.wait(1000)
 
-  console.log($.joyIds.length)
   if ($.joyIds.length < 12)
     return
 
   let maxLevel = Math.max(...$.joyIds)
-  if(maxLevel < 11)
+  if (maxLevel < 11)
     maxLevel = 11
-  if(maxLevel >33)
+  if (maxLevel > 33)
     maxLevel = 33
-  let minLevel = maxLevel-10
-  if(minLevel<0)
-    minLevel=1
+  let minLevel = maxLevel - 10
+  if (minLevel < 0)
+    minLevel = 1
 
-  var joyList_0 = getJoyPOS(0)
-  for(var i=0;i<joyList_0[0];i++)
-  {
-    await buyJoy(minLevel)
-    await $.wait(500)
+  var joyList_min = getJoyPOS(minLevel)
+  if (joyList_min.length < 2) {
+    var buyCnt = 2 - joyList_min.length
+    for (var i = 0; i > buyCnt; i++) {
+      await buyJoy(minLevel)
+      await $.wait(500)
+    }
   }
-  
-  for (var loopcnt = minLevel; loopcnt < maxLevel; loopcnt++) {
+
+  //检查有没有小于minLevel的，有就卖掉
+  for (var i = 1; i < minLevel; i++) {
+    var joyList_i = getJoyPOS(i)
+    for (var j = 0; j < joyList_i.length; j++) {
+      console.log('卖掉' + j + '位置的' + i + '级JOY')
+      sellJoy(i, j)
+    }
+  }
+
+  for (var loopcnt = minLevel; loopcnt <= maxLevel; loopcnt++) {
     //await recursiveMergeJoy(33)
-    let mergeResult=await mergeJoyByLevel(loopcnt,minLevel)
+    let mergeResult = await mergeJoyByLevel(loopcnt, minLevel)
     //if(mergeResult===false)
     //  break
     await $.wait(500)
   }
 
-  await $.wait(1000)
+  await $.wait(1500)
 }
 
-async function mergeJoyByLevel(joyLevel,minLevel) {
+async function mergeJoyByLevel(joyLevel, minLevel) {
   var joyList = getJoyPOS(joyLevel)
-  console.log(joyLevel+','+joyList)
+  console.log(joyLevel + ',' + joyList)
 
-  if (joyList[0] ===0 && joyLevel===minLevel)
-  {
+  if (joyList.length === 0 && joyLevel === minLevel) {
     var joyList_0 = getJoyPOS(0)
-    if(joyList_0[0] >=1 )
-    {
+    if (joyList_0.length >= 1) {
       await buyJoy(joyLevel)
       return false
     }
   }
 
-  if (joyList[0] < 2)
-  {
+  if (joyList[0] < 2) {
     var joyList_0 = getJoyPOS(0)
-    console.log('空格位置'+joyList_0)
-    if(joyLevel === minLevel)
-    {
-      if(joyList_0[0] > 0)
-      {
+    console.log('空格位置' + joyList_0)
+    if (joyLevel === minLevel) {
+      if (joyList_0.length > 0) {
         await buyJoy(joyLevel)
-        $.joyIds[joyList_0[1]]=joyLevel
+        $.joyIds[joyList_0[0]] = joyLevel
       }
     }
-    else 
+    else
       return false
   }
 
-  
-  console.log('合并'+joyLevel+' JOY')
-  let mergeResult =await mergeJoy(joyList[1], joyList[2])
-  if(mergeResult===false)
+
+  console.log('合并' + joyLevel + ' JOY')
+  let mergeResult = await mergeJoy(joyList[0], joyList[1])
+  if (mergeResult === false)
     return false
-  $.joyIds[joyList[1]] = 0
-  $.joyIds[joyList[2]] = joyLevel + 1
+  $.joyIds[joyList[0]] = 0
+  $.joyIds[joyList[1]] = joyLevel + 1
   //await $.wait(500)
   //await buyJoy(1)
   var i = 0;
@@ -276,10 +281,10 @@ async function recursiveMergeJoy(joyLevel) {
 */
 function getJoyPOS(joyLevel) {
   var joyList = [];
-  joyList.push(0)
+  //joyList.push(0)
   for (var i = 0; i < $.joyIds.length; i++) {
     if ($.joyIds[i] === joyLevel) {
-      joyList[0] += 1
+      //joyList[0] += 1
       joyList.push(i)
     }
   }
@@ -530,7 +535,7 @@ function getJoyShop() {
 }
 
 function mergeJoy(x, y) {
-  let mergeResult=false
+  let mergeResult = false
   let body = { "operateType": "MERGE", "fromBoxIndex": x, "targetBoxIndex": y }
   return new Promise(async resolve => {
     $.get(taskUrl('crazyJoy_joy_moveOrMerge', JSON.stringify(body)), async (err, resp, data) => {
@@ -559,11 +564,11 @@ function mergeJoy(x, y) {
                       return '未知JOY'
                   }
                 }
-                mergeResult=true
+                mergeResult = true
                 console.log(`合并成功，获得${level(data.data.newJoyId)}级Joy`)
                 if (data.data.newJoyId === 1007 && $.isNode()) await notify.sendNotify($.name, `京东账号${$.index} ${$.nickName}\n合并成功，获得${level(data.data.newJoyId)}级Joy`)
               } else {
-                mergeResult=true
+                mergeResult = true
                 console.log(`合并成功，获得${data.data.newJoyId}级Joy`)
               }
             } else
