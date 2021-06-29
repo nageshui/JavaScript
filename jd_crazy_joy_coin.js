@@ -191,11 +191,11 @@ async function mergeJoyByLevel(joyLevel, minLevel) {
   for (var i = 0; i < joyList.length / 2; i++) {
     console.log('合并' + joyLevel + '级JOY')
     let mergeResult = await mergeJoy(joyList[i * 2], joyList[i * 2 + 1])
-    if (mergeResult === false)
-      return false
-    $.joyIds[joyList[i * 2]] = 0
-    $.joyIds[joyList[i * 2 + 1]] = joyLevel + 1
-    //await $.wait(500)`
+    if (mergeResult === false) {
+      $.joyIds[joyList[i * 2]] = 0
+      $.joyIds[joyList[i * 2 + 1]] = joyLevel + 1
+    }
+    await $.wait(500)
     //await buyJoy(1)
     var i = 0;
     for (i = 0; i < $.joyIds.length; i++) {
