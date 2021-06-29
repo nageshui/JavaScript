@@ -60,6 +60,8 @@ if ($.isNode()) {
 
   while (true) {
     count++
+    if (count > 256)
+      break
     console.log(`============开始第${count}次挂机=============`)
     for (let i = 0; i < cookiesArr.length; i++) {
       if (cookiesArr[i]) {
