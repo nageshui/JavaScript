@@ -127,9 +127,19 @@ async function jdCrazyJoyNew() {
   let maxLevel = Math.max(...$.joyIds)
   if(maxLevel < 11)
     maxLevel = 11
+  if(maxLevel >33)
+    maxLevel = 33
   let minLevel = maxLevel-10
   if(minLevel<0)
     minLevel=1
+
+  var joyList_0 = getJoyPOS(0)
+  for(var i=0;i<joyList_0[0];i++)
+  {
+    await buyJoy(minLevel)
+    await $.wait(500)
+  }
+  
   for (var loopcnt = minLevel; loopcnt < maxLevel; loopcnt++) {
     //await recursiveMergeJoy(33)
     let mergeResult=await mergeJoyByLevel(loopcnt,minLevel)
