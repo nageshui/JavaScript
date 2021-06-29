@@ -198,8 +198,8 @@ async function mergeJoyByLevel(joyLevel, minLevel) {
   if (joyList.length < 2 && joyLevel !== minLevel)
     return true
 
-  console.log(joyList.length / 2)
-  for (var i = 0; i < joyList.length / 2; i++) {
+  console.log(Math.floor(joyList.length / 2))
+  for (var i = 0; i < Math.floor(joyList.length / 2); i++) {
     console.log('合并' + joyLevel + '级JOY')
     let mergeResult = await mergeJoy(joyList[i * 2], joyList[i * 2 + 1])
     if (mergeResult === true) {
