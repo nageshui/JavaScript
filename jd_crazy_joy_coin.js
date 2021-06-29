@@ -135,9 +135,10 @@ async function jdCrazyJoyNew() {
   var joyList_min = getJoyPOS(minLevel)
   if (joyList_min.length < 2) {
     var buyCnt = 2 - joyList_min.length
-    for (var i = 0; i > buyCnt; i++) {
+    for (var i = 0; i < buyCnt; i++) {
       await buyJoy(minLevel)
       await $.wait(500)
+      await getJoyList();
     }
   }
 
@@ -147,6 +148,8 @@ async function jdCrazyJoyNew() {
     for (var j = 0; j < joyList_i.length; j++) {
       console.log('卖掉' + j + '位置的' + i + '级JOY')
       sellJoy(i, j)
+      await $.wait(500)
+      await getJoyList();
     }
   }
 
@@ -187,7 +190,7 @@ async function mergeJoyByLevel(joyLevel, minLevel) {
   }
 
 
-  console.log('合并' + joyLevel + ' JOY')
+  console.log('合并' + joyLevel + '级JOY')
   let mergeResult = await mergeJoy(joyList[0], joyList[1])
   if (mergeResult === false)
     return false
