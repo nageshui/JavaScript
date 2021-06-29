@@ -159,8 +159,8 @@ async function jdCrazyJoyNew() {
   for (var i = 1; i < minLevel; i++) {
     var joyList_i = getJoyPOS(i)
     for (var j = 0; j < joyList_i.length; j++) {
-      console.log('卖掉' + j + '位置的' + i + '级JOY')
-      sellJoy(i, j)
+      console.log('卖掉' + joyList_i[i] + '位置的' + i + '级JOY')
+      sellJoy(joyList_i[i], j)
       await $.wait(500)
       await getJoyList();
     }
