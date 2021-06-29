@@ -176,17 +176,13 @@ async function mergeJoyByLevel(joyLevel, minLevel) {
     }
   }
 
-  if (joyList[0] < 2) {
+  if (joyList[0] < 2 && joyLevel === minLevel) {
     var joyList_0 = getJoyPOS(0)
     console.log('空格位置' + joyList_0)
-    if (joyLevel === minLevel) {
-      if (joyList_0.length > 0) {
-        await buyJoy(joyLevel)
-        $.joyIds[joyList_0[0]] = joyLevel
-      }
+    if (joyList_0.length > 0) {
+      await buyJoy(joyLevel)
+      $.joyIds[joyList_0[0]] = joyLevel
     }
-    else
-      return false
   }
 
 
@@ -196,7 +192,7 @@ async function mergeJoyByLevel(joyLevel, minLevel) {
     return false
   $.joyIds[joyList[0]] = 0
   $.joyIds[joyList[1]] = joyLevel + 1
-  //await $.wait(500)
+  //await $.wait(500)`
   //await buyJoy(1)
   var i = 0;
   for (i = 0; i < $.joyIds.length; i++) {
