@@ -103,7 +103,7 @@ async function jdCrazyJoyNew() {
     $.log(`${$.joyIds[8]} ${$.joyIds[9]} ${$.joyIds[10]} ${$.joyIds[11]}\n`)
   }
 
-  //await getJoyShop()
+  await getJoyShop()
   await $.wait(1000)
 
   // 如果格子全部被占有且没有可以合并的JOY，只能回收低级的JOY (且最低等级的JOY小于30级)
@@ -198,7 +198,6 @@ async function mergeJoyByLevel(joyLevel, minLevel) {
   if (joyList.length < 2 && joyLevel !== minLevel)
     return true
 
-  console.log(Math.floor(joyList.length / 2))
   for (var i = 0; i < Math.floor(joyList.length / 2); i++) {
     console.log('合并' + joyLevel + '级JOY')
     let mergeResult = await mergeJoy(joyList[i * 2], joyList[i * 2 + 1])
@@ -517,6 +516,7 @@ function getJoyShop() {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
+          console.log(data)
           data = JSON.parse(data);
           if (data.success && data.data && data.data.shop) {
             const shop = data.data.shop.filter(vo => vo.status === 1) || [];
