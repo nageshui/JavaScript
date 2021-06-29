@@ -146,7 +146,7 @@ async function jdCrazyJoyNew() {
   }
   */
 
-
+  minLevel = getCheapJoy(minLevel, 33)
   for (var loopcnt = minLevel; loopcnt <= maxLevel; loopcnt++) {
     //await recursiveMergeJoy(33)
     let mergeResult = await mergeJoyByLevel(loopcnt, minLevel)
@@ -295,6 +295,29 @@ function getJoyPOS(joyLevel) {
   }
 
   return joyList;
+}
+
+//找出最合算的joy
+function getCheapJoy(minLevel, maxLevel) {
+  var avgPriceList = []
+  var joyIdList = []
+  console.log('最低等级' + minLevel + ',最高等级' + maxLevel)
+  for (var i = 0; i < $.joyPrices.length; i++) {
+    if ($.joyPrices[i].joyId < minLevel || $.joyPrices[i].joyId > maxLevel) {
+      continue
+    }
+
+    avgPrice = $.joyPrices[i].coins / Math.pow(2, $.joyPrices[i].joyId)
+    console.log($.joyPrices[i].joyId + '级JOY平均价格' + avgPrice)
+    avgPriceList.push(avgPrice)
+    joyIdList.push($.joyPrices[i].joyId)
+  }
+
+  cheapPrice = Math.min(...avgPriceList)
+  for (var i = 0; i < avgPriceList.length; i++) {
+    if (avgPriceList[i] === cheapPrice)
+      return joyIdList[i]
+  }
 }
 
 async function jdCrazyJoy() {
