@@ -132,6 +132,7 @@ async function jdCrazyJoyNew() {
   if (minLevel < 0)
     minLevel = 1
 
+  /*
   var joyList_min = getJoyPOS(minLevel)
   if (joyList_min.length < 2) {
     var buyCnt = 2 - joyList_min.length
@@ -141,6 +142,14 @@ async function jdCrazyJoyNew() {
       await getJoyList();
     }
   }
+  */
+
+  var joyList_0 = getJoyPOS(0)
+  for (var i = 0; i < joyList_0.length; i++) {
+    await buyJoy(minLevel)
+    await $.wait(500)
+  }
+  await getJoyList();
 
   //检查有没有小于minLevel的，有就卖掉
   for (var i = 1; i < minLevel; i++) {
