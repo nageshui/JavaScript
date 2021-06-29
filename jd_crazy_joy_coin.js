@@ -206,13 +206,6 @@ async function mergeJoyByLevel(joyLevel, minLevel) {
       $.joyIds[joyList[i * 2 + 1]] = joyLevel + 1
     }
     await $.wait(500)
-    //await buyJoy(1)
-    var i = 0;
-    for (i = 0; i < $.joyIds.length; i++) {
-      if ($.joyIds[i] === 0) {
-        $.joyIds[i] = 1
-      }
-    }
   }
   return true
 }
