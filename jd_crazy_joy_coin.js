@@ -176,7 +176,7 @@ async function mergeJoyByLevel(joyLevel, minLevel) {
     }
   }
 
-  if (joyList[0] < 2 && joyLevel === minLevel) {
+  if (joyList.length < 2 && joyLevel === minLevel) {
     var joyList_0 = getJoyPOS(0)
     console.log('空格位置' + joyList_0)
     if (joyList_0.length > 0) {
@@ -184,6 +184,9 @@ async function mergeJoyByLevel(joyLevel, minLevel) {
       $.joyIds[joyList_0[0]] = joyLevel
     }
   }
+
+  if(joyList.length <2 && joyLevel!== minLevel)
+    return true
 
 
   console.log('合并' + joyLevel + '级JOY')
