@@ -185,7 +185,7 @@ async function mergeJoyByLevel(joyLevel, minLevel) {
     }
   }
 
-  if(joyList.length <2 && joyLevel!== minLevel)
+  if (joyList.length < 2 && joyLevel !== minLevel)
     return true
 
 
