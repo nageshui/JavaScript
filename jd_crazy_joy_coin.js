@@ -531,6 +531,7 @@ function getJoyList() {
 }
 
 function getJoyShop() {
+  $.joyPrices = []
   const body = { "paramData": { "entry": "SHOP" } }
   return new Promise((resolve) => {
     $.get(taskUrl('crazyJoy_joy_allowBoughtList', JSON.stringify(body)), async (err, resp, data) => {
