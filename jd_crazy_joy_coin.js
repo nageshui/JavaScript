@@ -146,6 +146,7 @@ async function jdCrazyJoyNew() {
   }
   */
 
+  minLevel = 1
   var buyLevel = getCheapJoy(minLevel, 33)
   for (var loopcnt = minLevel; loopcnt <= maxLevel; loopcnt++) {
     //await recursiveMergeJoy(33)
