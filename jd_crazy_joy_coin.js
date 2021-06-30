@@ -315,7 +315,7 @@ function getCheapJoy(minLevel, maxLevel) {
   }
 
   cheapPrice = Math.min(...avgPriceList)
-  for (var i = avgPriceList.length - 1; i >= 0; i++) {
+  for (var i = avgPriceList.length - 1; i >= 0; i--) {
     if (avgPriceList[i] === cheapPrice)
       return joyIdList[i]
   }
